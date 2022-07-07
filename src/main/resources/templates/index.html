@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <title>Trang chủ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap styles -->
+    <link th:href="@{/assets/user/css/bootstrap.css}" rel="stylesheet"/>
+    <!-- Customize styles -->
+
+    <link th:href="@{/assets/user/style.css}" rel="stylesheet"/>
+    <!-- font awesome styles -->
+
+    <link th:href="@{/assets/user/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+
+
+    <!-- Favicons -->
+
+    <link th:href="@{/assets/user/ico/favicon.ico}" rel="shortcut icon"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+            rel="stylesheet">
+    <link
+            href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+            rel="stylesheet">
+    <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="path/to/font-awesome/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+<!--
+	Upper Header Section
+-->
+
+<div th:replace="layouts/tagbar :: tagbar"></div>
+
+<!--
+Lower Header Section
+-->
+
+<div class="container">
+    <div id="gototop"></div>
+
+    <header th:replace="layouts/header :: header"></header>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <div th:replace="layouts/header :: header_div"></div>
+    <!--
+    Body Section
+    -->
+    <div class="row">
+
+        <div th:replace="layouts/phuluc :: phuluc"></div>
+
+        <div class="span9">
+            <div class="well np">
+                <div id="myCarousel" class="carousel slide homCar">
+
+                    <div class="carousel-inner">
+                        <th:block th:each="item,row : ${slides}">
+
+                            <th:block th:if="${ row.first }">
+                                <div class="item active">
+                                    <img style="width:100%" th:src="@{'/assets/user/img/slide/' +${item.img}}"
+                                         alt="bootstrap ecommerce templates">
+                                    <div class="carousel-caption">
+                                        <h4 th:text="${item.caption}"></h4>
+                                        <p><span th:text="${item.content}"></span></p>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${ not row.first }">
+                                <div class="item">
+                                    <img style="width:100%" th:src="@{'/assets/user/img/slide/' +${item.img}}"
+                                         alt="bootstrap ecommerce templates">
+                                    <div class="carousel-caption">
+                                        <h4 th:text="${item.caption}"></h4>
+                                        <p><span th:text="${item.content}"></span></p>
+                                    </div>
+                                </div>
+                            </th:block>
+
+                        </th:block>
+
+
+                    </div>
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                </div>
+            </div>
+            <!--
+            New Products
+            -->
+            <div class="well well-small">
+                <h3>Sản phẩm mới </h3>
+                <hr class="soften"/>
+                <div class="row-fluid">
+                    <div id="newProductCar" class="carousel slide">
+                        <div class="carousel-inner" >
+                            <th:block th:each="item,loop : ${products}" th:if="${(loop.index) % 4 == 0 }">
+                            <div class="item active" th:each="item1,loop1 : ${products}" th:if="${ loop.index == 0  &&  loop1.index == 0 }">
+                                <ul class="thumbnails" >
+                                    <li class="span3" th:each="item,loop : ${products}" th:if="${ loop.index >= loop1.index && loop.index < loop1.index + 4 }">
+                                        <div class="thumbnail" >
+                                            <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                                            <a href="#" class="tag"></a>
+                                            <a href="product_details.html"><img th:src="@{'/assets/user/img/'+ ${item.img}}" alt="bootstrap-ring"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                                <div class="item " th:each="item1,loop1 : ${products}" th:if="${ not ( loop.index == 0 &&  loop1.index == 0 ) && loop1.index % 4 == 0 }">
+                                    <ul class="thumbnails" >
+                                        <li class="span3" th:each="item,loop : ${products}" th:if="${ loop.index >= loop1.index && loop.index < loop1.index + 4 }">
+                                            <div class="thumbnail" >
+                                                <a class="zoomTool" href="product_details.html" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                                                <a href="#" class="tag"></a>
+                                                <a href="product_details.html"><img th:src="@{'/assets/user/img/'+ ${item.img}}" alt="bootstrap-ring"></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                               </th:block>
+                        </div>
+                            <a class="left carousel-control" href="#newProductCar" data-slide="prev">&lsaquo;</a>
+                            <a class="right carousel-control" href="#newProductCar" data-slide="next">&rsaquo;</a>
+                        </div>
+                    </div>
+
+                </div>
+                <!--
+                Featured Products
+                -->
+                <div class="well well-small">
+                    <h3><a class="btn btn-mini pull-right" href="products.html" title="View more">VIew More<span
+                            class="icon-plus"></span></a>Sản phẩm nổi bật</h3>
+                    <hr class="soften"/>
+                    <div class="row-fluid">
+
+                        <ul class="thumbnails" th:each="item2,loop2 : ${productsNoiBat}" th:if="${(loop2.index) % 3 == 0 }">
+                            <li class="span4" th:each="item,loop : ${productsNoiBat}" th:if="${ loop.index >= loop2.index && loop.index < loop2.index + 3 }">
+                                <div class="thumbnail">
+                                    <a class="zoomTool" th:href="@{'/addCart/'+ ${item.id_product}}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                                    <a href="product_details.html"><img th:src="@{'/assets/user/img/'+ ${item.img}}" alt=""></a>
+                                    <div class="caption">
+                                        <h5 th:text="${item.name}"></h5>
+                                        <h4>
+                                            <a class="defaultBtn" href="product_details.html" title="Click to view"><span class="icon-zoom-in"></span></a>
+                                            <a class="shopBtn" th:href="@{'/addCart/'+ ${item.id_product}}" title="add to cart"><span class="icon-plus"></span></a>
+                                            <span class="pull-right" >[[${#numbers.formatDecimal(item.price, 0, 'POINT', 0, 'POINT')}]] ₫</span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                </div>
+                <hr>
+                <div class="well well-small">
+                    <a class="btn btn-mini pull-right" href="#">Xem thêm <span class="icon-plus"></span></a>
+                    Tất cả sản phẩm
+                </div>
+
+
+            </div>
+        </div>
+                    <!--      Body    -->
+
+         <!--
+        Clients
+        -->
+        <section th:replace="layouts/footer :: footer_sec"></section>
+        <section th:replace="layouts/footer :: footer_foo"></section>
+
+    </div><!-- /container -->
+
+    <div th:replace="layouts/footer :: footer_link"></div>
+
+    <div th:replace="layouts/footer :: script"></div>
+
+</body>
+</html>

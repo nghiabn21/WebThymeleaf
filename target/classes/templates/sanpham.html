@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <title>Chi tiết sản phẩm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap styles -->
+    <link th:href="@{/assets/user/css/bootstrap.css}" rel="stylesheet"/>
+    <!-- Customize styles -->
+
+    <link th:href="@{/assets/user/style.css}" rel="stylesheet"/>
+    <!-- font awesome styles -->
+
+    <link th:href="@{/assets/user/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+
+
+    <!-- Favicons -->
+
+    <link th:href="@{/assets/user/ico/favicon.ico}" rel="shortcut icon"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+            rel="stylesheet">
+    <link
+            href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+            rel="stylesheet">
+    <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="path/to/font-awesome/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+<!--
+	Upper Header Section
+-->
+
+<div th:replace="layouts/tagbar :: tagbar"></div>
+
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <div id="gototop"></div>
+
+    <header th:replace="layouts/header :: header"></header>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <div th:replace="layouts/header :: header_div"></div>
+    <!--
+    Body Section
+    -->
+
+<!--<h1 th:text="${ Cart.size()}"></h1> -->
+
+    <div class="row">
+        <div id="sidebar" class="span3">
+            <div class="well well-small">
+                <ul class="nav nav-list">
+                    <th:block th:each="item : ${categorys}">
+                        <li><a th:href="@{'/san-pham/' + ${item.id}}"><span class="icon-circle-blank"
+                                                                            th:text="${ item.name }"></span></a></li>
+                    </th:block>
+
+                    <li><a class="totalInCart" href="cart.html"><strong>Số tiền đã mua :<span
+                            class="badge badge-warning pull-right" style="line-height:18px;">$448.42</span></strong></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="well well-small alert alert-warning cntr">
+                <h2>50% Discount</h2>
+                <p>
+                    only valid for online order. <br><br><a class="defaultBtn" href="#">Click here </a>
+                </p>
+            </div>
+            <div class="well well-small"><a href="#"><img th:src="@{/assets/user/img/paypal.jpg}"
+                                                          alt="payment method paypal"></a>
+            </div>
+
+            <a class="shopBtn btn-block" href="#">Upcoming products <br><small>Click to view</small></a>
+            <br>
+            <br>
+            <ul class="nav nav-list promowrapper">
+                <li>
+                    <div class="thumbnail">
+                        <a class="zoomTool" href="product_details.html" title="add to cart"><span
+                                class="icon-search"></span> QUICK VIEW</a>
+                        <img th:src="@{/assets/user/img/bootstrap-ecommerce-templates.png}"
+                             alt="bootstrap ecommerce templates">
+                        <div class="caption">
+                            <h4><a class="defaultBtn" href="product_details.html">VIEW</a> <span class="pull-right">$22.00</span>
+                            </h4>
+                        </div>
+                    </div>
+                </li>
+                <li style="border:0"> &nbsp;</li>
+                <li>
+                    <div class="thumbnail">
+                        <a class="zoomTool" href="product_details.html" title="add to cart"><span
+                                class="icon-search"></span> QUICK VIEW</a>
+                        <img th:src="@{/assets/img/shopping-cart-template.png}" alt="shopping cart template">
+                        <div class="caption">
+                            <h4><a class="defaultBtn" href="product_details.html">VIEW</a> <span class="pull-right">$22.00</span>
+                            </h4>
+                        </div>
+                    </div>
+                </li>
+                <li style="border:0"> &nbsp;</li>
+                <li>
+                    <div class="thumbnail">
+                        <a class="zoomTool" href="product_details.html" title="add to cart"><span
+                                class="icon-search"></span> QUICK VIEW</a>
+                        <img th:src="@{/assets/user/img/bootstrap-template.png}" alt="bootstrap template">
+                        <div class="caption">
+                            <h4><a class="defaultBtn" href="product_details.html">VIEW</a> <span class="pull-right">$22.00</span>
+                            </h4>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="span9">
+            <ul class="breadcrumb">
+                <li><a href="index.html">Trang chủ</a> <span class="divider">/</span></li>
+                <li><a href="products.html">Sản phẩm</a> <span class="divider">/</span></li>
+                <li class="active">Chi tiết sản phẩm</li>
+            </ul>
+            <div class="well well-small">
+                <div class="row-fluid">
+                    <div class="span5">
+                        <div id="myCarousel" class="carousel slide cntr">
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <a href="#"> <img th:src="@{'/assets/user/img/'+ ${product.img}}" alt=""
+                                                      style="width:100%"></a>
+                                </div>
+
+                            </div>
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                        </div>
+                    </div>
+                    <div class="span7">
+                        <h3 th:text="${product.name}"></h3>
+                        <hr class="soft"/>
+
+                        <form class="form-horizontal qtyFrm" method="get" th:action="@{'/addCart/'+ ${product.id_product}}">
+                            <div class="control-group">
+                                <label class="control-label"><span>[[${#numbers.formatDecimal(product.price, 0, 'POINT', 0, 'POINT')}]] ₫</span></label>
+                                <div class="controls">
+                                    <input type="number" min="0" value="0" class="span6">
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label"><span>Color</span></label>
+                                <div class="controls">
+                                    <select class="span11">
+                                        <option>Red</option>
+                                        <option>Purple</option>
+                                        <option>Pink</option>
+                                        <option>Red</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <p th:text="${product.title}">
+                            <p>
+                                <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span> Thêm giỏ hàng
+                                </button>
+                        </form>
+                    </div>
+                </div>
+                <hr class="softn clr"/>
+
+
+                <ul id="productDetail" class="nav nav-tabs">
+                    <li class="active"><a href="#home" data-toggle="tab">Chi tiết sản phẩm</a></li>
+                    <li class=""><a href="#profile" data-toggle="tab">Sản phẩm liên quan</a></li>
+
+                </ul>
+                <div id="myTabContent" class="tab-content tabWrapper">
+                    <div class="tab-pane fade active in" id="home" th:utext="${product.detail}">
+
+
+                    </div>
+                    <div class="tab-pane fade" id="profile">
+                        <th:block th:each="item : ${productByIdCategory}">
+                            <div class="row-fluid">
+                                <div class="span2">
+                                    <img th:src="@{'/assets/user/img/'+ ${item.img}}" alt="">
+                                </div>
+                                <div class="span6">
+                                    <h5 th:text="${item.name}"></h5>
+                                    <p th:text="${item.title}">
+
+                                    </p>
+                                </div>
+                                <div class="span4 alignR">
+                                    <form class="form-horizontal qtyFrm">
+                                        <h3>[[${#numbers.formatDecimal(item.price, 0, 'POINT', 0, 'POINT')}]] ₫</h3>
+
+                                        <div class="btn-group">
+                                            <a href="product_details.html" class="defaultBtn"><span
+                                                    class=" icon-shopping-cart"></span> Thêm giỏ hàng</a>
+                                            <a href="product_details.html" class="shopBtn">VIEW</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr class="soft"/>
+
+                        </th:block>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--      Body    -->
+
+    <!--
+   Clients
+   -->
+    <section th:replace="layouts/footer :: footer_sec"></section>
+    <section th:replace="layouts/footer :: footer_foo"></section>
+
+</div><!-- /container -->
+
+<div th:replace="layouts/footer :: footer_link"></div>
+
+<div th:replace="layouts/footer :: script"></div>
+
+</body>
+</html>

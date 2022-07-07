@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <title>Trang chủ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap styles -->
+    <link th:href="@{/assets/user/css/bootstrap.css}" rel="stylesheet"/>
+    <!-- Customize styles -->
+
+
+
+    <link th:href="@{/assets/user/style.css}" rel="stylesheet"/>
+    <!-- font awesome styles -->
+
+    <link th:href="@{/assets/user/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+
+
+    <!-- Favicons -->
+
+    <link th:href="@{/assets/user/ico/favicon.ico}" rel="shortcut icon"/>
+    <link
+            href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+            rel="stylesheet">
+    <link
+            href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+            rel="stylesheet">
+    <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="path/to/font-awesome/css/font-awesome.min.css">
+
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .pagination a:hover:not(.active) {background-color: #ddd;}
+    </style>
+</head>
+<body>
+
+<!--
+	Upper Header Section
+-->
+
+<div th:replace="layouts/tagbar :: tagbar"></div>
+
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <div id="gototop"></div>
+
+    <header th:replace="layouts/header :: header"></header>
+
+    <!--
+    Navigation Bar Section
+    -->
+    <div th:replace="layouts/header :: header_div"></div>
+                    <!-- Body Section  -->
+
+    <div class="well well-small">
+        <div class="row">
+            <span style="margin-left: 25px;">Danh sách sản phẩm</span> <select
+                class="pull-right">
+            <option>A - Z</option>
+            <option>Cao - Thấp</option>
+        </select>
+        </div>
+        <div class="row-fluid">
+        <ul class="thumbnails" th:each="item2,loop2 : ${getAllProducts}" th:if="${(loop2.index) % 3 == 0 }">
+            <li class="span4" th:each="item,loop : ${getAllProducts}" th:if="${ loop.index >= loop2.index && loop.index < loop2.index + 3 }">
+                <div class="thumbnail">
+                    <a class="zoomTool" th:href="@{'/chi-tiet-san-pham/'+ ${item.id_product}}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                    <a th:href="@{'/chi-tiet-san-pham/'+ ${item.id_product}}"><img th:src="@{'/assets/user/img/'+ ${item.img}}" alt=""></a>
+                    <div class="caption">
+                        <h5 th:text="${item.name}"></h5>
+                        <h4>
+                            <a  class="defaultBtn" href="product_details.html" title="Click to view"><span class="icon-zoom-in"></span></a>
+                            <a class="shopBtn" href="#" title="add to cart"><span class="icon-plus"></span></a>
+                            <span class="pull-right" >[[${#numbers.formatDecimal(item.price, 0, 'POINT', 0, 'POINT')}]] ₫</span>
+                        </h4>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        </div>
+
+    </div>
+                    <!--      Body    -->
+    <div class="pagination">
+<!--        Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]-->
+        <ul class="pagination">
+            <li class="page-item">
+                <a  class="page-link" th:if="${currentPage > 1}" th:href="@{'/san-pham/' + ${id} + '/1'}">First</a>
+                <span th:unless="${currentPage > 1}">First</span>
+            </li>
+            <li class="page-item">
+                <a th:if="${currentPage > 1}" th:href="@{'/san-pham/' + ${id} + '/' + ${currentPage - 1}}">Previous</a>
+                <span th:unless="${currentPage > 1}">Previous</span>
+            </li>
+            <li class="page-item">
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="@{'/san-pham/' + ${id} + '/' + ${i}}">[[${i}]]</a>
+                    </span>
+            </li>
+            <li class="page-item">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/san-pham/' + ${id} + '/' + ${currentPage + 1}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </li>
+            <li class="page-item">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/san-pham/' + ${id} + '/' + ${totalPages}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </li>
+        </ul>
+    </div>
+         <!--
+        Clients
+        -->
+        <section th:replace="layouts/footer :: footer_sec"></section>
+        <section th:replace="layouts/footer :: footer_foo"></section>
+
+    </div><!-- /container -->
+
+    <div th:replace="layouts/footer :: footer_link"></div>
+
+    <div th:replace="layouts/footer :: script"></div>
+
+</body>
+</html>

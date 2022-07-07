@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="tagbar">
+    <div class="topNav">
+        <div class="container">
+            <div class="alignR">
+                <div class="pull-left socialNw">
+                    <a href="#"><span class="icon-twitter"></span></a>
+                    <a href="#"><span class="icon-facebook"></span></a>
+                    <a href="#"><span class="icon-youtube"></span></a>
+                    <a href="#"><span class="icon-tumblr"></span></a>
+                </div>
+                <a class="active" href="index.html"> <span class="icon-home"></span> Home</a>
+
+                <th:block th:if="${ not (session.LoginInfo == null )}">
+                <a href="#" ><span class="icon-user"></span> [[${session.LoginInfo.displayName}]]</a>
+                <a th:href="@{/dang-xuat}"><span class="icon-edit"></span> Đăng Xuất</a>
+                </th:block>
+                <th:block th:if="${  session.LoginInfo == null  }">
+                    <a th:href="@{/dang-ky}"><span class="icon-edit"></span> Đăng Ký</a>
+                </th:block>
+
+                <a href="contact.html"><span class="icon-envelope"></span> Contact us</a>
+                <a th:href="@{/gio-hang}" ><span class="icon-shopping-cart" ></span>[[${session.TotalQuantityCart}]]  Sản phẩm - <span
+                        class="badge badge-warning" >[[${#numbers.formatDecimal(session.TotalPriceCart, 0, 'POINT', 0, 'POINT')}]] ₫  </span></a>
+            </div>
+        </div>
+    </div>
+</div>

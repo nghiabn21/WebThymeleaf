@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="utf-8">
+  <title>Trang chủ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Bootstrap styles -->
+  <link th:href="@{/assets/user/css/bootstrap.css}" rel="stylesheet"/>
+  <!-- Customize styles -->
+
+  <link th:href="@{/assets/user/style.css}" rel="stylesheet"/>
+  <!-- font awesome styles -->
+
+  <link th:href="@{/assets/user/font-awesome/css/font-awesome.css}" rel="stylesheet"/>
+
+
+  <!-- Favicons -->
+
+  <link th:href="@{/assets/user/ico/favicon.ico}" rel="shortcut icon"/>
+  <link
+          href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+          rel="stylesheet">
+  <link
+          href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+          rel="stylesheet">
+  <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet"
+        href="path/to/font-awesome/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+<!--
+	Upper Header Section
+-->
+
+<div th:replace="layouts/tagbar :: tagbar"></div>
+
+<!--
+Lower Header Section
+-->
+
+<div class="container">
+  <div id="gototop"></div>
+
+  <header th:replace="layouts/header :: header"></header>
+
+  <!--
+  Navigation Bar Section
+  -->
+  <div th:replace="layouts/header :: header_div"></div>
+  <!--
+  Body Section
+  -->
+
+    <div class="row">
+      <div class="span12">
+        <ul class="breadcrumb">
+          <li><a href="index.html">Trang chủ</a> <span class="divider">/</span></li>
+          <li class="active">Giỏ hàng</li>
+        </ul>
+        <div class="well well-small">
+          <h1>
+            Giỏ hàng <small class="pull-right">[[${session.TotalQuantityCart}]] sản phẩm trong giỏ hàng </small>
+          </h1>
+          <hr class="soften" />
+
+          <table class="table table-bordered table-condensed">
+            <thead>
+            <tr>
+              <th>Hình ảnh</th>
+              <th>Mô tả</th>
+              <th>Màu sắc</th>
+              <th>Giá bán</th>
+              <th>Số lượng</th>
+              <th>Chỉnh sửa</th>
+              <th>Xóa</th>
+              <th>Tổng tiền</th>
+            </tr>
+            </thead>
+            <tbody>
+              <th:block th:each="item : ${session.Cart}">
+              <tr>
+                <td><img width="100" th:src="@{'/assets/user/img/'+ ${item.value.product.img}}" alt=""></td>
+                <td >[[${item.value.product.title}]]</td>
+                <td><span class="shopBtn" style="background-color:${ item.value.product.code_color };"><span class="icon-ok"></span></span></td>
+                <td> [[${#numbers.formatDecimal(item.value.product.price, 0, 'POINT', 0, 'POINT')}]] ₫</td>
+                <td><input type="number" min="0" max="1000" class="span1" style="max-width: 34px " placeholder="1" th:id="${item.key}"  size="16"  th:value="${ item.value.quanty }"></td>
+                <td>
+                  <button th:data-id="${ item.key }" class="btn btn-mini btn-danger edit-cart" type="button">
+                    <span class="icon-edit"></span>
+                  </button>
+                </td>
+                <td>
+                  <a th:href="@{'/DeleteCart/' + ${item.key}}" class="btn btn-mini btn-danger" type="button"> <span class="icon-remove"></span></a></td>
+                <td>[[${#numbers.formatDecimal(item.value.totalPrice, 0, 'POINT', 0, 'POINT')}]] ₫</td>
+              </tr>
+
+            </th:block>
+            </tbody>
+          </table>
+          <br />
+          <a th:href="@{/trang-chu}" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Tiếp tục mua sắm </a>
+          <a th:href="@{/checkout}"  class="shopBtn btn-large pull-right">Thanh toán <span class="icon-arrow-right"></span></a>
+
+        </div>
+      </div>
+    </div>
+
+
+  <!--      Body    -->
+
+  <!--
+ Clients
+ -->
+  <section th:replace="layouts/footer :: footer_sec"></section>
+  <section th:replace="layouts/footer :: footer_foo"></section>
+
+</div><!-- /container -->
+
+<div th:replace="layouts/footer :: footer_link"></div>
+
+<div th:replace="layouts/footer :: script"></div>
+<script>
+  $(".edit-cart").on("click", function() {
+    var id = $(this).data("id");
+    var quanty = $("#" + id).val();
+    window.location = "/EditCart/" + id + "/" + quanty;
+  });
+</script>
+</body>
+</html>

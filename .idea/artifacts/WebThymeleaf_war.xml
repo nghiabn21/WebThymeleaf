@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="WebThymeleaf:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>WebThymeleaf</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="WebThymeleaf-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="WebThymeleaf:war exploded" />
+    </root>
+  </artifact>
+</component>
