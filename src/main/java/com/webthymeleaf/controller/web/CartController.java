@@ -1,12 +1,10 @@
-package com.webthymeleaf.controller;
+package com.webthymeleaf.controller.web;
 
 import com.webthymeleaf.dto.CartDto;
-import com.webthymeleaf.dto.ProductsDao;
 import com.webthymeleaf.entity.Bills;
 import com.webthymeleaf.entity.User;
 import com.webthymeleaf.serviceimpl.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +19,7 @@ import java.util.List;
 
 @Controller
 @SessionAttributes("Cart")
-public class CartController extends MenuController{
+public class CartController extends MenuController {
     @Autowired
     CartSerImpl cartService ;
     @Autowired

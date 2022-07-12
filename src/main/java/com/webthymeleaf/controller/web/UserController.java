@@ -1,10 +1,10 @@
-package com.webthymeleaf.controller;
+package com.webthymeleaf.controller.web;
 
+import com.webthymeleaf.controller.web.MenuController;
 import com.webthymeleaf.entity.User;
 import com.webthymeleaf.serviceimpl.UserSerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class UserController extends MenuController{
+public class UserController extends MenuController {
 
     @Autowired
     UserSerImpl userSer ;

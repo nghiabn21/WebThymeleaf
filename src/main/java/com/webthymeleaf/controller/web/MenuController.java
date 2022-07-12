@@ -1,4 +1,4 @@
-package com.webthymeleaf.controller;
+package com.webthymeleaf.controller.web;
 
 import com.webthymeleaf.serviceimpl.CategorysSerImpl;
 import com.webthymeleaf.serviceimpl.MenusSerImpl;

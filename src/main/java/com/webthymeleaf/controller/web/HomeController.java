@@ -1,4 +1,4 @@
-package com.webthymeleaf.controller;
+package com.webthymeleaf.controller.web;
 
 import com.webthymeleaf.dto.ProductsDao;
 import com.webthymeleaf.serviceimpl.CategorysSerImpl;
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class HomeController extends MenuController{
+public class HomeController extends MenuController {
     @Autowired
     SlidesSerImpl slidesSer;
 
