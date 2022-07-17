@@ -1,10 +1,7 @@
 package com.webthymeleaf.controller.web;
 
 import com.webthymeleaf.dto.ProductsDao;
-import com.webthymeleaf.serviceimpl.CategorysSerImpl;
-import com.webthymeleaf.serviceimpl.MenusSerImpl;
-import com.webthymeleaf.serviceimpl.ProductsSerImpl;
-import com.webthymeleaf.serviceimpl.SlidesSerImpl;
+import com.webthymeleaf.serviceimpl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -29,7 +26,7 @@ public class HomeController extends MenuController {
     private CategorysSerImpl categorysSer;
 
     @Autowired
-    private ProductsSerImpl dto;
+    private ProductSerImpl dto;
 
     @RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
     public ModelAndView homePage() {
@@ -38,7 +35,7 @@ public class HomeController extends MenuController {
         _mvShare.addObject("products", dto.GetDataProduct(1));
         _mvShare.addObject("productsNoiBat", dto.GetDataProductNew(1));
 
-        _mvShare.setViewName("/index");
+        _mvShare.setViewName("/web/index");
 
         return _mvShare;
     }
@@ -57,7 +54,7 @@ public class HomeController extends MenuController {
         model.addAttribute("totalItems", totalItems); // tổng số sản phẩm
         model.addAttribute("getAllProducts", getAllProducts);   // 1 trang bn sản phẩm
 
-        return "/products";
+        return "/web/products";
     }
 
     @GetMapping("/san-pham/{id}")
@@ -67,13 +64,13 @@ public class HomeController extends MenuController {
 
     @GetMapping(value = "/san-pham")
     public ModelAndView sanPham() {
-        _mvShare.setViewName("/product");
+        _mvShare.setViewName("/web/product");
         return _mvShare;
     }
 
     @RequestMapping(value = "/gioi-thieu", method = RequestMethod.GET)
     public ModelAndView aboutUs() {
-        _mvShare.setViewName("/aboutUs");
+        _mvShare.setViewName("/web/aboutUs");
         return _mvShare;
     }
 

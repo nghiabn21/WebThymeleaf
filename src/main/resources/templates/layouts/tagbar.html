@@ -19,8 +19,8 @@
                 <th:block th:if="${  session.LoginInfo == null  }">
                     <a th:href="@{/dang-ky}"><span class="icon-edit"></span> Đăng Ký</a>
                 </th:block>
-
                 <a href="contact.html"><span class="icon-envelope"></span> Contact us</a>
+                <a th:href="@{/admin}"><span class="icon-envelope"></span> Quản lý hệ thống</a>
                 <a th:href="@{/gio-hang}" ><span class="icon-shopping-cart" ></span>[[${session.TotalQuantityCart}]]  Sản phẩm - <span
                         class="badge badge-warning" >[[${#numbers.formatDecimal(session.TotalPriceCart, 0, 'POINT', 0, 'POINT')}]] ₫  </span></a>
             </div>

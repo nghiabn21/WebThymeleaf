@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Trang Quản trị</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link th:href="@{/assets/admin/css/styles.css}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<!--    <style>-->
+<!--        .pagination {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--        }-->
+
+<!--        .pagination a {-->
+<!--            color: black;-->
+<!--            float: left;-->
+<!--            padding: 8px 16px;-->
+<!--            text-decoration: none;-->
+<!--        }-->
+
+<!--        .pagination a.active {-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .pagination a:hover:not(.active) {background-color: #ddd;}-->
+<!--    </style>-->
+</head>
+<body class="sb-nav-fixed">
+
+<nav th:replace="layouts/admin/header :: body_nav"></nav>
+
+<div id="layoutSidenav">
+
+    <div th:replace="layouts/admin/header :: body_div"></div>
+
+    <div id="layoutSidenav_content">
+                            <!--     ĐÂY LÀ PHẦN NỘI DUNG        -->
+        <br>
+
+        <h2 class="text-center">Thông tin người dùng</h2>
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">DisplayName</th>
+                <th scope="col">Address</th>
+                <th scope="col">Name</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="item : ${All}">
+            <tr>
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.email}"></td>
+                <td th:text="${item.password}"></td>
+                <td th:text="${item.displayName}"></td>
+                <td th:text="${item.address}"></td>
+                <td th:text="${item.toString()}"></td>
+                <th>  <a th:href="@{'/nguoi-dung/edit/' + ${item.id}}">Edit</a> </th>
+                <th>  <a th:href="@{'/nguoi-dung/delete/' + ${item.id}}">Delete</a></th>
+            </tr>
+            </th:block>
+
+            </tbody>
+        </table>
+
+
+<!--        <div class="pagination">-->
+<!--            &lt;!&ndash;        Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]&ndash;&gt;-->
+<!--            <ul class="pagination">-->
+<!--                <li class="page-item">-->
+<!--                    <a  class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/nguoi-dung'  + '/1'}">First</a>-->
+<!--                    <span th:unless="${currentPage > 1}">First</span>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a th:if="${currentPage > 1}" th:href="@{'/admin/nguoi-dung'  + '/' + ${currentPage - 1}}">Previous</a>-->
+<!--                    <span th:unless="${currentPage > 1}">Previous</span>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">-->
+<!--                    <a th:href="@{'/admin/nguoi-dung'  + '/' + ${i}}">[[${i}]]</a>-->
+<!--                    </span>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a th:if="${currentPage < totalPages}" th:href="@{'/admin/nguoi-dung'  + '/' + ${currentPage + 1}}">Next</a>-->
+<!--                    <span th:unless="${currentPage < totalPages}">Next</span>-->
+<!--                </li>-->
+<!--                <li class="page-item">-->
+<!--                    <a th:if="${currentPage < totalPages}" th:href="@{'/admin/nguoi-dung'  + '/' + ${totalPages}}">Last</a>-->
+<!--                    <span th:unless="${currentPage < totalPages}">Last</span>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+
+
+
+
+       <footer th:replace="layouts/admin/footer :: footer_on_div"></footer>
+
+    </div>
+</div>
+
+<div th:replace="layouts/admin/footer :: footer_script"></div>
+
+</body>
+</html>

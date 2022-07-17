@@ -36,7 +36,7 @@ public class CartController extends MenuController {
         _mvShare.addObject("menus", menusSer.GetDataMenus());
         _mvShare.addObject("categorys", categorysSer.GetDataCategorys());
 
-        _mvShare.setViewName("/cart");
+        _mvShare.setViewName("/web/cart");
         return _mvShare;
     }
 
@@ -91,7 +91,7 @@ public class CartController extends MenuController {
 
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
     public ModelAndView checkOut(HttpServletRequest request, HttpSession session) {
-        _mvShare.setViewName("/thanhtoan");
+
         Bills bills = new Bills(); //tạo đối tượng mới
         User loginInfo = (User) session.getAttribute("LoginInfo"); //lấy thông tin login
         if(loginInfo != null) {  //khác rỗng có nghĩa là ng dùng đã đăng nhập r
@@ -100,6 +100,7 @@ public class CartController extends MenuController {
             bills.setEmail(loginInfo.getEmail());
         }
         _mvShare.addObject("bills", bills);
+        _mvShare.setViewName("/web/thanhtoan");
         return _mvShare;
     }
 
@@ -107,13 +108,16 @@ public class CartController extends MenuController {
     @RequestMapping(value = "/checkout", method = RequestMethod.POST)
     public String checkOutBill(HttpServletRequest request, HttpSession session, @ModelAttribute("bills") Bills bill) {
         List<Bills> bills = new ArrayList<>();
-        bills.add(bill);
+        bills.add(bill) ;
+        bill.setQuanty(Integer.parseInt((String) session.getAttribute("TotalQuantyCart")));
+        bill.setTotal(Double.parseDouble((String) session.getAttribute("TotalPriceCart")));
+        billsService.AddBills(bill);
         if(bills.size() > 0) {
+
             HashMap<Integer, CartDto> carts = (HashMap<Integer, CartDto>) session.getAttribute("Cart");
             billsService.AddBillsDetail(carts);
         }
-//        bill.setQuanty(Integer.parseInt((String) session.getAttribute("TotalQuantyCart")));
-//        bill.setTotal(Double.parseDouble((String) session.getAttribute("TotalPriceCart")));
+
         session.removeAttribute("Cart");
 
         return "redirect:gio-hang";
