@@ -44,14 +44,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable() //CSRF ( Cross Site Request Forgery) là kĩ thuật tấn công bằng cách sử dụng quyền chứng thực của người sử dụng đối với 1 website khác
                 .authorizeRequests()
-                     .antMatchers("/dang-ky").permitAll()
-                     .antMatchers("/").permitAll()
-              //  .antMatchers("/admin").access("hasAuthority('Admin')")
-                     .and()
+                .antMatchers("/dang-ky").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/admin").hasAuthority("Admin")
+                .and()
                 .formLogin()
-                     .loginPage("/login")
+                .loginProcessingUrl("/j_spring_security_check") //
+                .loginPage("/login")
+                .defaultSuccessUrl("/trang-chu") //đăng nhập xong sẽ vào đây
+                .usernameParameter("username")
+                .passwordParameter("password")
                      .permitAll()
                      .and()
                      .logout()
@@ -59,7 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                      .clearAuthentication(true)
                      .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                      .logoutSuccessUrl("/login?logout")
-                     .permitAll();
+                     .permitAll()
+                .and()
+                   .exceptionHandling().accessDeniedPage("/403");
+
     }
 
 

@@ -8,10 +8,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Data
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Table(name = "role")
 public class Role {
     @Id
@@ -22,11 +23,10 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Collection<User> users = new ArrayList<>();
+    private Collection<User> users ;
 
-//    @Override
-//    public String toString() {
-//        return name ;
-//
-//    }
+    @Override
+    public String toString() {
+        return this.name ;
+    }
 }

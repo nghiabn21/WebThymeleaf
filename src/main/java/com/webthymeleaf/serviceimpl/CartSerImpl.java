@@ -30,7 +30,6 @@ public class CartSerImpl implements ICartSer {
             item.setQuanty(1);
             item.setTotalPrice(productsDao.getPrice());
         }
-
         cart.put(id, item); // lấy hàng cũ set vào hàng mới
         return cart;
     }

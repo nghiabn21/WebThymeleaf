@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -69,7 +70,7 @@
                 <td th:text="${item.password}"></td>
                 <td th:text="${item.displayName}"></td>
                 <td th:text="${item.address}"></td>
-                <td th:text="${item.toString()}"></td>
+                <td th:text="${item.roles}"></td>
                 <th>  <a th:href="@{'/nguoi-dung/edit/' + ${item.id}}">Edit</a> </th>
                 <th>  <a th:href="@{'/nguoi-dung/delete/' + ${item.id}}">Delete</a></th>
             </tr>
@@ -77,51 +78,6 @@
 
             </tbody>
         </table>
-
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                DataTable Example
-            </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-
-
-
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
 
 
 <!--        <div class="pagination">-->

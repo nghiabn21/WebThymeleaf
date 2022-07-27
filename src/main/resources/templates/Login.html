@@ -33,10 +33,56 @@
 <br>
 <div class = "container">
     <div class = "row">
+<!--        <div class = "col-md-6 col-md-offset-3">-->
+
+<!--            <h1> User Login Page </h1>-->
+<!--            <form th:action="@{/dang-nhap}" th:object="${user}" method="post">-->
+
+<!--                &lt;!&ndash; error message &ndash;&gt;-->
+<!--                <div th:if="${param.error}">-->
+<!--                    <div class="alert alert-danger">Invalid username or password.</div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; logout message &ndash;&gt;-->
+<!--                <div th:if="${param.logout}">-->
+<!--                    <div class="alert alert-info">You have been logged out.</div>-->
+<!--                </div>-->
+
+<!--                <div class = "form-group">-->
+<!--                    <label th:for ="username"> Username </label>-->
+<!--                    <input type="text" class = "form-control" th:field="*{email}"-->
+<!--                           placeholder="Enter Email ID" autofocus="autofocus">-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <label th:for="password">Password</label>-->
+<!--                    <input type="password"-->
+<!--                           class="form-control" th:field="*{password}"-->
+<!--                           placeholder="Enter Password" />-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-sm-6 col-sm-offset-3">-->
+<!--                            <input type="submit" name="login-submit" id="login-submit"-->
+<!--                                   class="form-control btn btn-primary" value="Log In" />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--            <div class="form-group">-->
+<!--						<span>New user? <a  th:href="@{/dang-ky}">Register here</a></span>-->
+
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <span><a  th:href="@{/dang-ky}">Change Password</a></span>-->
+
+<!--            </div>-->
+<!--        </div>-->
         <div class = "col-md-6 col-md-offset-3">
 
             <h1> User Login Page </h1>
-            <form th:action="@{/dang-nhap}" th:object="${user}" method="post">
+            <form th:action="@{/j_spring_security_check}"  method="post">
 
                 <!-- error message -->
                 <div th:if="${param.error}">
@@ -50,14 +96,14 @@
 
                 <div class = "form-group">
                     <label th:for ="username"> Username </label>
-                    <input type="text" class = "form-control" th:field="*{email}"
+                    <input type="text" class = "form-control" name="username"
                            placeholder="Enter Email ID" autofocus="autofocus">
                 </div>
 
                 <div class="form-group">
                     <label th:for="password">Password</label>
                     <input type="password"
-                           class="form-control" th:field="*{password}"
+                           class="form-control" name="password"
                            placeholder="Enter Password" />
                 </div>
 
@@ -71,7 +117,7 @@
                 </div>
             </form>
             <div class="form-group">
-						<span>New user? <a  th:href="@{/dang-ky}">Register here</a></span>
+                <span>New user? <a  th:href="@{/dang-ky}">Register here</a></span>
 
             </div>
             <div class="form-group">

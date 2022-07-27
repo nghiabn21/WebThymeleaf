@@ -1,9 +1,12 @@
 package com.webthymeleaf.controller.web;
 
 import com.webthymeleaf.dto.ProductsDao;
+import com.webthymeleaf.entity.User;
 import com.webthymeleaf.serviceimpl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
+
+import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -35,10 +42,13 @@ public class HomeController extends MenuController {
         _mvShare.addObject("products", dto.GetDataProduct(1));
         _mvShare.addObject("productsNoiBat", dto.GetDataProductNew(1));
 
+
         _mvShare.setViewName("/web/index");
 
         return _mvShare;
     }
+
+
 
     @GetMapping("/san-pham/{id}/{pageNumber}")
     public String getOnePage(Model model,@PathVariable("id") int id , @PathVariable("pageNumber") int currentPage){

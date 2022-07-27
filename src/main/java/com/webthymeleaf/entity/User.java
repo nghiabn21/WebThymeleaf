@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-@Data
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Table(name = "user")
 public class User {
     @Id
@@ -41,8 +43,4 @@ public class User {
     )
     private Collection<Role> roles = new ArrayList<>();
 
-//    @Override
-//    public String toString() {
-//        return  roles.toString() ;
-//    }
 }

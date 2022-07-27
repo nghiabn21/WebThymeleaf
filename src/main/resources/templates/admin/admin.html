@@ -11,6 +11,14 @@
 
     <link th:href="@{/assets/admin/css/styles.css}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+    .anhhuyen{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+    }
+    </style>
 </head>
 <body class="sb-nav-fixed">
 
@@ -22,7 +30,9 @@
 
     <div id="layoutSidenav_content">
                             <!--     ĐÂY LÀ PHẦN NỘI DUNG        -->
+     <br>
 
+     <img class="anhhuyen" th:src="@{/assets/admin/img/huyen.jpg}" width="500" height="500">
 
 <!----------------------------------------------------------------------------------------------->
        <footer th:replace="layouts/admin/footer :: footer_on_div"></footer>

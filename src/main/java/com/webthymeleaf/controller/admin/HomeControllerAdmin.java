@@ -63,7 +63,7 @@ public class HomeControllerAdmin {
     public String findByUserAndRole(Model model){
         Pageable pageable = PageRequest.of(0,100);
         Page<User> getAllProducts = userSer.findByUserAndRole(pageable);
-        List<User> getAll = getAllProducts.getContent();
+        List<User> getAll = userSer.listAll();
 
 //        model.addAttribute("id", id);
 //        model.addAttribute("currentPage", currentPage); // trang hiện tại

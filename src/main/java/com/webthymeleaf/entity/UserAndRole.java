@@ -16,12 +16,14 @@ public class UserAndRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id ;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
 
 
-    @Column(name = "role_id")
-    private Integer roleId;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role roleId;
 
 
 }

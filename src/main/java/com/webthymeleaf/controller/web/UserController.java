@@ -4,6 +4,8 @@ import com.webthymeleaf.entity.Role;
 import com.webthymeleaf.entity.User;
 import com.webthymeleaf.serviceimpl.UserSerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,12 +46,12 @@ public class UserController extends MenuController {
         return "registration";
     }
 
-    @PostMapping(value = "/dang-nhap")
-    public ModelAndView Login(HttpSession session, @ModelAttribute("user") User user){
+    @PostMapping(value = "/j_spring_security_check")
+    public ModelAndView Login(HttpSession session, @ModelAttribute("user") User user, @AuthenticationPrincipal Authentication principal){
          user =  userSer.CheckAcount(user);
         if(user != null) {
             _mvShare.setViewName("redirect:trang-chu");
-            session.setAttribute("LoginInfo", user);
+            session.setAttribute("LoginInfo", principal.getName());
         }else {
             _mvShare.addObject("statusLogin", "Đăng nhập không thành công");
         }
@@ -57,13 +59,30 @@ public class UserController extends MenuController {
     }
 
     @RequestMapping(value = "/dang-xuat", method = RequestMethod.GET)
-    public String dangXuat(HttpSession session, HttpServletRequest request) {
-        session.removeAttribute("LoginInfo");
-        return "redirect:" + request.getHeader("Referer");
+    public String dangXuat(HttpSession session, HttpServletRequest request, @AuthenticationPrincipal Authentication authentication) {
+      //  authentication.isAuthenticated()  ;
+      //  session.removeAttribute("LoginInfo");
+        return "redirect:trang-chu" ;
     }
 
-    @ModelAttribute("user")
-    public User userRegistration(){
-        return new User();
+    @GetMapping("/nguoi-dung/edit/{id}")
+    public ModelAndView editUser(@PathVariable("id") Integer id){
+       User user = userSer.getUser(id);
+        List<Role> roles = userSer.getListRole();
+        _mvShare.addObject("roles", roles);
+        _mvShare.addObject("user", user);
+        _mvShare.setViewName("/admin/edit_form");
+        return _mvShare;
     }
+
+    @PostMapping("/nguoi-dung/edit")
+    public String editUser( User user){
+        userSer.update(user);
+        return "redirect:/admin/nguoi-dung";
+    }
+
+//    @ModelAttribute("user")
+//    public User userRegistration(){
+//        return new User();
+//    }
 }

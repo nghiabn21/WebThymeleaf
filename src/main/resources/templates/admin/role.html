@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -69,7 +70,7 @@
                 <td th:text="${item.password}"></td>
                 <td th:text="${item.displayName}"></td>
                 <td th:text="${item.address}"></td>
-                <td th:text="${item.toString()}"></td>
+                <td th:text="${item.roles}"></td>
                 <th>  <a th:href="@{'/nguoi-dung/edit/' + ${item.id}}">Edit</a> </th>
                 <th>  <a th:href="@{'/nguoi-dung/delete/' + ${item.id}}">Delete</a></th>
             </tr>
