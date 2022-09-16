@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -31,6 +32,7 @@
     <div id="layoutSidenav_content">
                             <!--     ĐÂY LÀ PHẦN NỘI DUNG        -->
      <br>
+       <h3 class="text-center">Chào mừng <span sec:authentication="principal.username" style="color: #942a25"></span> đến với trang quản trị hệ thống</h3>
 
      <img class="anhhuyen" th:src="@{/assets/admin/img/huyen.jpg}" width="500" height="500">
 

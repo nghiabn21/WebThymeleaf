@@ -1,18 +1,20 @@
 package com.webthymeleaf.serviceimpl;
 
 import com.webthymeleaf.dto.CartDto;
+import com.webthymeleaf.dto.ProductsDao;
 import com.webthymeleaf.entity.BillDetails;
 import com.webthymeleaf.entity.Bills;
+import com.webthymeleaf.entity.Products;
 import com.webthymeleaf.repository.BillDetailRepo;
 import com.webthymeleaf.repository.BillRepo;
+import com.webthymeleaf.repository.ProductsRepo;
 import com.webthymeleaf.service.IBills;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class BillsSerImpl implements IBills {
@@ -20,6 +22,9 @@ public class BillsSerImpl implements IBills {
     BillRepo billsDao ;
     @Autowired
     BillDetailRepo billDetailRepo ;
+
+    @Autowired
+    ProductsRepo productsRepo ;
     @Override
     public Bills AddBills(Bills bill) {
 
@@ -28,16 +33,18 @@ public class BillsSerImpl implements IBills {
 
     @Override
     public void AddBillsDetail(HashMap<Integer, CartDto> carts) {
-        int idBills = billsDao.GetIDLastBills();
-
+       int idBills = billsDao.GetIDLastBills();
+       Optional<Bills> bills = billsDao.findById(idBills);
         for(Map.Entry<Integer, CartDto> itemCart : carts.entrySet()) {
             BillDetails billDetail = new BillDetails();
-            billDetail.setIdBills(idBills);
-            billDetail.setIdProduct(itemCart.getValue().getProduct().getId_product());
+            billDetail.setBills(bills.get());
             billDetail.setQuanty(itemCart.getValue().getQuanty());
             billDetail.setTotal(itemCart.getValue().getTotalPrice());
 
-             billDetailRepo.save(billDetail) ;
+            int id = itemCart.getValue().getProduct().getId_product();
+            Optional<Products> pro = productsRepo.findById(id);
+            billDetail.setIdProduct(pro.get());
+            billDetailRepo.save(billDetail) ;
         }
     }
 

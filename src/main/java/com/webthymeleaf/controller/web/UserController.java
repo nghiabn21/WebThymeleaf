@@ -62,7 +62,7 @@ public class UserController extends MenuController {
     public String dangXuat(HttpSession session, HttpServletRequest request, @AuthenticationPrincipal Authentication authentication) {
       //  authentication.isAuthenticated()  ;
       //  session.removeAttribute("LoginInfo");
-        return "redirect:trang-chu" ;
+        return "redirect:login" ;
     }
 
     @GetMapping("/nguoi-dung/edit/{id}")

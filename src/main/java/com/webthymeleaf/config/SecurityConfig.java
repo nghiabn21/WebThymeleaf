@@ -47,7 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/dang-ky").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin").hasAuthority("Admin")
+                .antMatchers("/admin").hasAnyAuthority("Admin","Manager")
+                .antMatchers("/nguoi-dung/edit/*").hasAuthority("Admin")
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/j_spring_security_check") //

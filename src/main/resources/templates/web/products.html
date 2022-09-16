@@ -87,8 +87,8 @@ Lower Header Section
         <ul class="thumbnails" th:each="item2,loop2 : ${getAllProducts}" th:if="${(loop2.index) % 3 == 0 }">
             <li class="span4" th:each="item,loop : ${getAllProducts}" th:if="${ loop.index >= loop2.index && loop.index < loop2.index + 3 }">
                 <div class="thumbnail">
-                    <a class="zoomTool" th:href="@{'/chi-tiet-san-pham/'+ ${item.id_product}}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
-                    <a th:href="@{'/chi-tiet-san-pham/'+ ${item.id_product}}"><img th:src="@{'/assets/user/img/'+ ${item.img}}" alt=""></a>
+                    <a class="zoomTool" th:href="@{'/api/chi-tiet-san-pham/'+ ${item.id_product}}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+                    <a th:href="@{'/api/chi-tiet-san-pham/'+ ${item.id_product}}"><img th:src="@{'/assets/user/img/'+ ${item.img}}" alt=""></a>
                     <div class="caption">
                         <h5 th:text="${item.name}"></h5>
                         <h4>

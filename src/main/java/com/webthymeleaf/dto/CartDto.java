@@ -12,7 +12,4 @@ public class CartDto {
 	private double totalPrice; //tổng giá
 	private ProductsDao product; // list danh sachs sanr pahm
 
-
-
-
 }
