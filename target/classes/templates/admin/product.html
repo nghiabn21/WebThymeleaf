@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Trang Quản trị</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link th:href="@{/assets/admin/css/styles.css}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .pagination a:hover:not(.active) {background-color: #ddd;}
+    </style>
+</head>
+<body class="sb-nav-fixed">
+
+<nav th:replace="layouts/admin/header :: body_nav"></nav>
+
+<div id="layoutSidenav">
+
+    <div th:replace="layouts/admin/header :: body_div"></div>
+
+    <div id="layoutSidenav_content">
+                            <!--     ĐÂY LÀ PHẦN NỘI DUNG        -->
+        <br>
+        <div class="text-center"><h1>Danh sách sản phẩm</h1></div>
+        <br>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>IdCategory</th>
+                <th>Size</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Sale</th>
+                <th>Title</th>
+                <th>HighLight</th>
+                <th>NewProduct</th>
+                <th>Detail</th>
+                <th>CreatedAt</th>
+                <th>UpdateAt</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="category : ${getAllProducts}">
+                <tr>
+                    <td th:text="${category.id}"></td>
+                    <td th:text="${category.id_category}"></td>
+                    <td th:text="${category.size}"></td>
+                    <td th:text="${category.name}"></td>
+                    <td th:text="${category.price}"></td>
+                    <td th:text="${category.sale}"></td>
+                    <td th:text="${category.title}"></td>
+                    <td th:text="${category.highlight}"></td>
+                    <td th:text="${category.new_product}"></td>
+                    <td th:text="${category.detail}"></td>
+                    <td th:text="${category.created_at}"></td>
+                    <td th:text="${category.updated_at}"></td>
+
+                </tr>
+
+            </th:block>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <!--        Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]-->
+            <ul class="pagination">
+                <li class="page-item">
+                    <a  class="page-link" th:if="${currentPage > 1}" th:href="@{'/admin/find-all'  + '/1'}">First</a>
+                    <span th:unless="${currentPage > 1}">First</span>
+                </li>
+                <li class="page-item">
+                    <a th:if="${currentPage > 1}" th:href="@{'/admin/find-all'  + '/' + ${currentPage - 1}}">Previous</a>
+                    <span th:unless="${currentPage > 1}">Previous</span>
+                </li>
+                <li class="page-item">
+                    <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="@{'/admin/find-all'  + '/' + ${i}}">[[${i}]]</a>
+                    </span>
+                </li>
+                <li class="page-item">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/admin/find-all'  + '/' + ${currentPage + 1}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </li>
+                <li class="page-item">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/admin/find-all'  + '/' + ${totalPages}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+       <footer th:replace="layouts/admin/footer :: footer_on_div"></footer>
+
+    </div>
+</div>
+
+<div th:replace="layouts/admin/footer :: footer_script"></div>
+
+</body>
+</html>

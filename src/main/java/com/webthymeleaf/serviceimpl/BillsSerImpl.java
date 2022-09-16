@@ -7,6 +7,8 @@ import com.webthymeleaf.repository.BillDetailRepo;
 import com.webthymeleaf.repository.BillRepo;
 import com.webthymeleaf.service.IBills;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -37,5 +39,10 @@ public class BillsSerImpl implements IBills {
 
              billDetailRepo.save(billDetail) ;
         }
+    }
+
+    @Override
+    public Page<Bills> findAllBill(Pageable pageable) {
+        return billsDao.findAll(pageable);
     }
 }

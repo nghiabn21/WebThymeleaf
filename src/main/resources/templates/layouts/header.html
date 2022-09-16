@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <header th:fragment="header" id="header">
     <div class="row">
@@ -50,7 +51,7 @@
                     <input type="text" placeholder="Search" class="search-query span2">
                 </form>
                 <ul class="nav pull-right">
-                    <th:block th:if="${  session.LoginInfo == null }">
+                    <th:block th:if="${ #request.userPrincipal.name == null}">
                     <li class="dropdown" >
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#" ><span class="icon-lock"></span> Đăng nhập <b class="caret"></b></a>
                         <div class="dropdown-menu">
@@ -71,10 +72,13 @@
                         </div>
                     </li>
                    </th:block>
-                    <th:block th:if="${ not (session.LoginInfo == null ) }">
-                        <li><a href="#" >[[${session.LoginInfo.displayName}]] <b
+                    <th:block th:if="${ not ( #request.userPrincipal.name == null) }">
+
+                        <li ><a href="#" ><span sec:authentication="principal.username"> </span> <b
                                 class="caret"></b></a></li>
                     </th:block>
+
+
 
                 </ul>
             </div>
