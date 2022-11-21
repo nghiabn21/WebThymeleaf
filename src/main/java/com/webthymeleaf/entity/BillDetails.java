@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Data
 @Entity
@@ -16,13 +19,20 @@ public class BillDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "id_product")
-    private Integer idProduct;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_product_detail")
+    private Products idProduct ;
 
-    @Column(name = "id_bills")
-    private Integer idBills;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_bills")
+    private Bills bills;
+
+
     @Column(name = "quanty")
     private int quanty;
+
     @Column(name = "total")
     private double total;
+
+
 }

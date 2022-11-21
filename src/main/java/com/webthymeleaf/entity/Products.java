@@ -47,4 +47,8 @@ public class Products {
     @OneToMany // 1 brand cho nhiều loại
     @JoinColumn(name = "id_product")
     private List<Colors> colors ;
+
+    @OneToMany
+    @JoinColumn(name = "id_product_detail")
+    private List<BillDetails> billDetails;
 }

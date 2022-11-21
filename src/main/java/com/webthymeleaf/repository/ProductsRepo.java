@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductsRepo extends JpaRepository<Products, Integer> {
@@ -39,6 +40,9 @@ public interface ProductsRepo extends JpaRepository<Products, Integer> {
             ", p.new_product , p.detail , c.id  , c.name  , c.code  , c.img  " +
             ", p.created_at ,  p.updated_at) from Products p Inner join Colors c on p.id = c.products.id where 1 =1 and p.id = ?1" )
     List<ProductsDao> getProductById(int id);
+
+    @Query(value = "from Products pr where pr.id=?1")
+    Optional<Products> findById(int id);
 
 
 

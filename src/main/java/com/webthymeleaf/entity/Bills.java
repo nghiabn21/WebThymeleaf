@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -36,4 +37,7 @@ public class Bills {
 
     @Column(name = "quanty")
     private Integer quanty;
+
+    @OneToMany(mappedBy = "bills",cascade = CascadeType.ALL)
+    private List<BillDetails> billDetails;
 }
